@@ -26,7 +26,7 @@
             counter="[[value]]"
             on-counter-changed="_onCounterChanged"></my-counter>
         <my-slim-counter
-            counter$="[[value]]"
+            counter="[[value]]"
             on-counter-changed="_onCounterChanged"></my-slim-counter>
     </div>
     <div class="container">
@@ -34,9 +34,7 @@
     </div>
   </template>
 
-  <script src="./my-counter.js"></script>
-  <script src="./bower_components/slimjs/Slim.js"></script>
-  <script src="./my-slim-counter.js"></script>
+
   <script>  
 
     class MyPolymerContainer extends Polymer.Element {
@@ -47,11 +45,16 @@
 
       static get properties() {
         return {
+          value: {
+            type: Number,
+            value: 0
+          }
         }
       }
-    
+
       _onCounterChanged(evt) {
-          this.value = evt.detail.counter;
+        console.log('[my-polymer-container] _onCounterChanged',  evt.detail);
+        this.value = evt.detail.counter;
       }
     }
 
