@@ -1,0 +1,22 @@
+{
+  "name": "pas-que-polymer",
+  "authors": [
+    "Horacio <horacio.gonzalez@gmail.com>"
+  ],
+  "description": "20170628 - RennesJS - Il ny a pas que Polymer dans la vie",
+  "main": "",
+  "license": "Apache",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.1",
+    "slimjs": "eavichay/slim.js#^2.9.9",
+    "bram": "matthewp/bram#^0.6.6"
+  }
+}

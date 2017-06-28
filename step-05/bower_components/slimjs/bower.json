@@ -1,0 +1,12 @@
+{
+  "name": "slimjs",
+  "main": "Slim.js",
+  "version": "2.6.0",
+  "ignore": [
+    "example",
+    "components",
+    "bin",
+    "framework",
+    "plugins"
+  ]
+}
