@@ -49,11 +49,12 @@ class extends Slim {
     
     onBeforeUpdate() {
         // console.log( this.counter, this.getAttribute('counter'), Number.parseInt(this.getAttribute('counter')))
-        if (this.counter == undefined) {
-            this.counter = Number.parseInt(this.getAttribute('counter'))||0;
-        }
+
     }
-    onCreated() {
+    onCreated() {        
+        if (this.counter == undefined) {
+             this.counter = Number.parseInt(this.getAttribute('counter'))||0;
+        }
         this.button.onclick = () => {
             this.counter++;
             this.dispatchEvent(new CustomEvent('counter-changed', {detail: {counter: this.counter}}));
