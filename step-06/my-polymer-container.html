@@ -1,0 +1,89 @@
+
+<link rel="import" href="./bower_components/polymer/polymer.html">
+<link rel="import" href="./my-polymer-counter.html">
+
+<dom-module id="my-polymer-container">
+
+  <template>
+    <style>
+      :host {
+        font-size: 3rem;
+      }
+      .container {
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-around;
+      }
+      .container > *{  
+        margin: 2rem 1rem;;
+      }
+      .value {
+
+      }
+    </style> 
+    <div class="container">
+        <my-polymer-counter 
+            counter="[[value]]"
+            on-counter-changed="_onCounterChanged"></my-polymer-counter>
+        <my-counter
+            counter="[[value]]"
+            on-counter-changed="_onCounterChanged"></my-counter>
+        <my-slim-counter
+            counter="[[value]]"
+            on-counter-changed="_onCounterChanged"></my-slim-counter>
+        <my-bram-counter
+            counter="[[value]]"
+            on-counter-changed="_onCounterChanged"></my-bram-counter>
+        <my-skate-counter
+            counter="[[value]]"
+            on-counter-changed="_onCounterChanged"></my-skate-counter>
+        <stencil-counter id="stencilCounter"
+            counter="[[value]]"
+            on-currentcountchanged="_onCounterChanged"></stencil-counter>
+    </div>
+    <div class="container">
+        <div class="value">Shared value: [[value]]</div>
+    </div>
+  </template>
+
+
+  <script>  
+
+    class MyPolymerContainer extends Polymer.Element {
+
+      static get is() {
+        return 'my-polymer-container';
+      }
+
+      static get properties() {
+        return {
+          value: {
+            type: Number,
+            value: 0,
+            observer: '_onValueChange'
+          }
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this.$.stencilCounter.addEventListener('currentCountChanged', (e) => this._onCounterChanged(e));
+      }
+
+      _onCounterChanged(evt) {
+        console.log('[my-polymer-container] _onCounterChanged',  evt.detail);
+        console.log('[my-polymer-container] before',this.value);
+        this.value = evt.detail.counter;
+
+        console.log('[my-polymer-container] after',this.value);
+      }
+
+
+      _onValueChange() {
+        console.log('[my-polymer-container] _onValueChange', this.value);
+      }
+    }
+
+    customElements.define('my-polymer-container', MyPolymerContainer);
+  </script>
+</dom-module>  

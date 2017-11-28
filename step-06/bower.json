@@ -1,0 +1,22 @@
+{
+  "name": "a-world-outside-polymer",
+  "authors": [
+    "Horacio <horacio.gonzalez@gmail.com>"
+  ],
+  "description": "Mixing web components for different libraries",
+  "main": "",
+  "license": "Apache",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.1",
+    "slimjs": "eavichay/slim.js#^2.9.9",
+    "bram": "matthewp/bram#^0.6.6"
+  }
+}
