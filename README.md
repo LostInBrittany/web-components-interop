@@ -1,1 +1,1 @@
-# a-world-outside-polymer
+# The Web Components Interoperability Challenge

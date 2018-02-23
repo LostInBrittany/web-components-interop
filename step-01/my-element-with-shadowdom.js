@@ -3,7 +3,7 @@ class MyElementWithShadowDom extends HTMLElement {
   // This gets called when the HTML parser sees your tag
   constructor() {
     super(); // always call super() first in the ctor.
-    this.msg = 'Hello, RennesJS!';
+    this.msg = 'Hello, TouraineTech!';
     this.attachShadow({ mode: 'open' });
   }
   // Called when your element is inserted in the DOM or
