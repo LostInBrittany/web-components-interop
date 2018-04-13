@@ -1,16 +1,16 @@
 class MyCounter extends HTMLElement {
-    
+
   constructor() {
     super();
     this._counter = 0;
     this.attachShadow({ mode: 'open' });
   }
 
-  connectedCallback() { 
-    this.render(); 
-    this.display(); 
+  connectedCallback() {
+    this.render();
+    this.display();
   }
-  
+
   static get observedAttributes() { return [ 'counter' ] }
 
   attributeChangedCallback(attr, oldVal, newVal) {
@@ -20,7 +20,7 @@ class MyCounter extends HTMLElement {
   }
 
   get counter() { return this._counter; }
-  set counter(value) { 
+  set counter(value) {
     if (value != this._counter) {
       this._counter = Number.parseInt(value);
       this.setAttribute('counter', value);
@@ -32,12 +32,13 @@ class MyCounter extends HTMLElement {
     this.counter = this.counter + 1;
     this.dispatchEvent(new CustomEvent('counter-changed', {detail: {counter: this.counter}}));
   }
-  
+
   render() {
+    console.log('[my-counter] render');
     let container = document.createElement('div');
     container.style.display = 'flex';
     container.style.flexFlow = 'row wrap';
-    container.style.justifyContent = 'space-around'; 
+    container.style.justifyContent = 'space-around';
     container.style.alignItems = 'center';
     container.style.backgroundColor = '#ffaaaa';
     container.style.padding = '1rem';

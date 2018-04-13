@@ -8,16 +8,91 @@
 
     <!-- Load your element -->
     <link rel="import" href="./my-polymer-container.html">
+    <style>
+      :host {
+        font-size: 3rem;
+      }
+      .container {
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-around;
+      }
+      .container > *{
+        margin: 2rem 1rem;;
+      }
+      .value {
+        font-size: 1.5em;
+      }
+    </style>
   </head>
   <script src="./bower_components/slimjs/Slim.min.js"></script>
   <script src="./bower_components/bram/bram.umd.min.js"></script>
   <script src="./libs/skate.es6.js"></script>
+
   <script src="./my-slim-counter.js"></script>
   <script src="./my-bram-counter.js"></script>
-  <script src="./my-skate-counter.js"></script>
+  <script type="module" src="./my-skate-counter.js"></script>
   <script src="./my-counter.js"></script>
   <script src="./stencil/www/build/app.js"></script>
+
+  <script type="module">
+    import Vue from '/node_modules/vue/dist/vue.esm.browser.js';
+
+    let myVueContainer = {
+      template: `
+        <div>
+          <div class="container">
+              <my-polymer-counter
+                  :counter="value"
+                  v-on:counter-changed="_onCounterChanged"></my-polymer-counter>
+              <my-counter
+                  :counter="value"
+                  v-on:counter-changed="_onCounterChanged"></my-counter>
+              <my-slim-counter
+                  :counter="value"
+                  v-on:counter-changed="_onCounterChanged"></my-slim-counter>
+              <my-bram-counter
+                  :counter="value"
+                  v-on:counter-changed="_onCounterChanged"></my-bram-counter>
+              <my-skate-counter
+                  :counter="value"
+                  v-on:counter-changed="_onCounterChanged"></my-skate-counter>
+              <stencil-counter id="stencilCounter"
+                  :counter="value"
+                  v-on:counter-changed="_onCounterChanged"></stencil-counter>
+          </div>
+          <div class="container">
+              <div class="value">Shared value: {{value}}</div>
+          </div>
+        </div>
+      `,
+      data: function() {
+        return {
+          value: 0,
+        }
+      },
+      methods: {
+        _onCounterChanged: function(evt) {
+          console.log('[my-vue-container] _onCounterChanged',  evt.detail);
+          // console.log('[my-vue-container] before',this.value);
+          this.value = evt.detail.counter;
+          // console.log('[my-vue-container] after',this.value);
+        }
+      },
+    };
+
+    var app = new Vue({
+      el: '#app',
+      data: {},
+      components: {
+        'my-vue-container' : myVueContainer,
+      }
+    })
+  </script>
+  
   <body>
-    <my-polymer-container></my-polymer-container>
+    <div id="app">
+      <my-vue-container></my-vue-container>
+    </div>
   </body>
 </html>

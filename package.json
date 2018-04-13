@@ -1,0 +1,23 @@
+{
+  "name": "the_web_components_interoperability_challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LostInBrittany/web-components-interop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LostInBrittany/web-components-interop/issues"
+  },
+  "homepage": "https://github.com/LostInBrittany/web-components-interop#readme",
+  "dependencies": {
+    "skatejs": "^5.1.1",
+    "vue": "^2.5.16"
+  }
+}

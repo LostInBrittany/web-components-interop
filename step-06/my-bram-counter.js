@@ -60,6 +60,14 @@ class MyBramCounter extends Bram(HTMLElement) {
   }
   
   static get observedProperties() { return [ 'counter' ] }  //Non documented
+  static get observedAttributes() { return [ 'counter' ] }  //Non documented 
+
+  attributeChangedCallback(attr, oldVal, newVal) {          //Non documented
+    if (oldVal !== newVal) {
+      this[attr] = newVal;
+    }
+  }
+
 
   increase() {
     this.model.counter++;
