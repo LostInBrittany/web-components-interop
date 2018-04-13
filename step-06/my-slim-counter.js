@@ -31,34 +31,44 @@ Slim.tag('my-slim-counter', `
       }
       my-slim-counter .value {
         margin: 0.5rem;
+        font-size: 5rem;
       }
     </style> 
     <div class="container">
-        <div class="button"  slim-id="button">
+        <div class="button"  s:id="button">
             <img src="./img/slim.png">
         </div>
-        <div class="value" bind> [[counter]] </div>
+        <div class="value" bind> {{counter}} </div>
     </div>`, 
 
 class extends Slim {
-
-
+    
+    
     onBeforeCreated() {
-        // console.log('Going to be created')
+       //  console.log('[my-slim-counter] Going to be created')
     }
     
-    onBeforeUpdate() {
-        // console.log( this.counter, this.getAttribute('counter'), Number.parseInt(this.getAttribute('counter')))
+    onRender() {
+        // console.log('[my-slim-counter] before update', this.counter, this.getAttribute('counter'), Number.parseInt(this.getAttribute('counter')))
 
     }
+    static get observedAttributes() { return [ 'counter' ] }
+
+    attributeChangedCallback(attr, oldVal, newVal) {
+        if (oldVal !== newVal) {
+        this[attr] = newVal;
+        }
+    }
     onCreated() {        
+        console.log('[my-slim-counter] Created', this.counter)
         if (this.counter == undefined) {
-             this.counter = Number.parseInt(this.getAttribute('counter'))||0;
+             this.counter = Number.parseInt(this.getAttribute('counter'))||'0';
         }
         this.button.onclick = () => {
             this.counter++;
             this.dispatchEvent(new CustomEvent('counter-changed', {detail: {counter: this.counter}}));
         }
+        
     }
 });
 
