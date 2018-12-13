@@ -1,6 +1,6 @@
 {
   "name": "the_web_components_interoperability_challenge",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/LostInBrittany/web-components-interop#readme",
   "dependencies": {
-    "skatejs": "^5.1.1",
-    "vue": "^2.5.16"
+    "@polymer/lit-element": "^0.6.4",
+    "@polymer/polymer": "^3.1.0",
+    "@skatejs/renderer-lit-html": "^0.2.2",
+    "skatejs": "^5.2.4",
+    "slim-js": "^4.0.5"
   }
 }

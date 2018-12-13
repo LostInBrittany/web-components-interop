@@ -1,5 +1,7 @@
-Slim.tag('my-slim-counter', `
-    <style>
+import { Slim } from '/node_modules/slim-js/Slim.js'
+
+let template = `
+<style>
       my-slim-counter .container {
         display: block;
         font-size: 5rem;
@@ -34,34 +36,36 @@ Slim.tag('my-slim-counter', `
       }
     </style> 
     <div class="container">
-        <div class="button"  slim-id="button">
+        <div class="button"  slim-id="button" click='increment'>
             <img src="./img/slim.png">
         </div>
-        <div class="value" bind> [[counter]] </div>
-    </div>`, 
+        <div class="value" bind> {{toString(counter)}} </div>
+    </div>`;
 
-class extends Slim {
+Slim.tag('my-slim-counter', template,
 
+  class extends Slim {
 
-    onBeforeCreated() {
-        // console.log('Going to be created')
+    // native API
+    static get observedAttributes() {
+      return ['counter'];
     }
-    
-    onBeforeUpdate() {
-        // console.log( this.counter, this.getAttribute('counter'), Number.parseInt(this.getAttribute('counter')))
 
+    // bind attributes to properties
+    // when 'counter' attribute changed - it is reflected to the property, and the component alters the relevant text node.
+    get autoBoundAttributes() {
+      return ['counter'];
     }
-    onCreated() {        
-        if (this.counter == undefined) {
-             this.counter = Number.parseInt(this.getAttribute('counter'))||0;
-        }
-        this.button.onclick = () => {
-            this.counter++;
-            this.dispatchEvent(new CustomEvent('counter-changed', {detail: {counter: this.counter}}));
-        }
-    }
-});
 
-// console.log(document.createElement('my-slim-counter').constructor)
+    increment() {
+      this.counter = this.counter + 1;
+      this.dispatchEvent(new CustomEvent('increased', { detail: { counter: this.counter } }));
+    }
+
+    toString(value) {
+      return value.toString();
+    }
+  });
+
 
 
